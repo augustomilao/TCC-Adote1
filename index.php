@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+if($_SESSION['cpf'] != NULL){
+    // header('Location: www.google.com');
+    
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="ptbr">
 
@@ -11,28 +23,32 @@
         body {
             background-color: #e3e3e3;
         }
-        .divs{
+
+        .divs {
             width: 50%;
             margin: 10vh 25vw;
         }
-        .block{
+
+        .block {
             display: block;
         }
-        .none{
+
+        .none {
             display: none;
         }
-        .pointer{
+
+        .pointer {
             font-weight: bold;
             cursor: pointer;
         }
-        .pointer:hover{
+
+        .pointer:hover {
             color: blue;
         }
     </style>
 </head>
 
 <body>
-
 
     <div id="logindiv" class="divs block">
         <h2>Login</h2>
@@ -43,7 +59,12 @@
             <label for="senha">Senha</label>
             <input class="form-control" type="password" name="senha">
             <br>
-            <button class="btn btn-primary" type="submit">Login</button>
+            <?php
+                if(@!empty($_GET['erro'])){
+                    echo "<p style='color:brown;font-weight:bold'>Erro de: ". $_GET['erro'] . "</p>";
+                };
+            ?>
+            <button class="btn btn-danger" type="submit">Login</button>
         </form>
 
         <div>
@@ -54,7 +75,7 @@
 
     <div id="cadastrodiv" class="divs none">
 
-    //TODO Criar verificações para criar a conta
+        //TODO Criar verificações para criar a conta
         <h2>Cadastro</h2>
         <form action="controladores/controleCadastroUsuario.php" method="post">
 
@@ -69,7 +90,7 @@
 
             <label for="cep">CEP</label>
             <input class="form-control" type="text" name="cep">
-            
+
             <label for="senha">Senha</label>
             <input class="form-control" type="text" name="senha">
 
@@ -86,14 +107,14 @@
     </div>
 
     <script>
-        function Login(){
+        function Login() {
             document.getElementById('logindiv').style.display = 'block';
-                document.getElementById('cadastrodiv').style.display = 'none';
+            document.getElementById('cadastrodiv').style.display = 'none';
         }
 
-        function Cadastro(){
+        function Cadastro() {
             document.getElementById('logindiv').style.display = 'none';
-                document.getElementById('cadastrodiv').style.display = 'block';
+            document.getElementById('cadastrodiv').style.display = 'block';
         }
     </script>
 
