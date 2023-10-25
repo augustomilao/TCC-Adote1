@@ -2,7 +2,7 @@
 
 session_start();
 
-if($_SESSION['cpf'] != NULL){
+if(@$_SESSION['cpf'] != NULL){
     // header('Location: www.google.com');
     
 }
