@@ -2,6 +2,7 @@
 
 function Cadastro($conn, $cpf, $nome_usuario, $email, $senha, $cep){
     $recuperarSenha = sha1($cpf . $senha);
+    $senha = sha1($senha);
 
     $sql = "INSERT INTO usuarios (cpf, nome_usuario, email, senha, cep, recuperarSenha) VALUES ('$cpf', '$nome_usuario', '$email', '$senha', '$cep', '$recuperarSenha')";
     $resultado = $conn -> query($sql);

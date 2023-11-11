@@ -12,6 +12,13 @@ empresas (?)
 <?php
 
 session_start();
+var_dump($_SESSION);
+include '../modelos/conexao.php';
+include '../modelos/modelopost.php';
+
+$posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
+
+var_dump($posts);
 
 ?>
 
@@ -32,16 +39,15 @@ session_start();
     <div class="tudo container">
         <br>
         <h4>Seus Dados</h4>
-        <div style="display: grid; grid-template-columns: 30% 70%;">
-            <div>
-                <img src="https://placehold.co/250" alt="">
+        
+            <div style="text-align: center;">
+                <h5><?= $_SESSION['nome_usuario'] ?></h5>
+                <img src="https://placehold.co/250" alt=""><br><br>
             </div>
             <div>
-                <div style="display: grid; grid-template-columns: 50% 50%;">
+                <div style="text-align: center;">
                     <div>
-                        <h5>Nome:</h5>
-                        <p><?= $_SESSION['nome_usuario'] ?></p>
-                        <br><br>
+
                         <h5>E-Mail:</h5>
                         <p><?= $_SESSION['email'] ?></p>
                     </div>
@@ -51,20 +57,23 @@ session_start();
                        <br>
                        <!-- //TODO Mudar senha e cep -->
                        <button class="btn btn-danger" style="width: 250px;">Mudar Senha</button><br><br>
-                       <button class="btn btn-warning" style="width: 250px;">Mudar CEP</button>
+                       <button class="btn btn-warning" style="width: 250px;">Mudar CEP</button><br><br>
+                       <p>Tem algum serviço que queira anunciar? Cadastre aqui!</p>
+                       <button class="btn btn-success" onclick="novoServico()" style="width: 250px;">Cadastrar Serviço</button><br><br>
                     </div>
                 </div>
             </div>
-        </div>
+        
 
         <br>
         <hr style="padding: 0; margin:0">
         <br>
 
-        <h4>Seus Pets</h4>
-        <p>Adicione pets para mostra-los para o mundo! Ou para achar um novo lar para eles</p>
+        <h4>Seus Posts</h4>
 
         <div style="display:grid; grid-template-columns: auto auto auto auto;">
+
+        <!-- //TODO Criar "seus posts, ao inves de seus pets" -->
 
             <div>
                 <div>
@@ -84,6 +93,12 @@ session_start();
 
 
     </div>
+
+    <script>
+        function novoServico(){
+            location.href = 'novoServico.php';
+        }
+    </script>
 
 </body>
 

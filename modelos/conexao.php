@@ -5,6 +5,11 @@ $database   = "adote1";
 $username   = "root";
 $password   = "";
 
+// $servername = "localhost";
+// $database   = "id11713715_usuarios";
+// $username   = "id11713715_root";
+// $password   = "8y4*fF1wU@i)Jiz!";
+
 // conexão protegida
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn = new mysqli($servername, $username, $password, $database);

@@ -8,6 +8,15 @@ cadastrar pets
 perfil
 empresas (?)
 -->
+<?php
+
+session_start();
+
+if(@$_SESSION['cpf'] == NULL){
+    header('Location: /');
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="ptbr">

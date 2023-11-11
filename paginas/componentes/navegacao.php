@@ -47,7 +47,7 @@ li a:hover {
     <ul>
         <li><a href="principal.php">Home</a></li>
         <li><a href="servicos.php">Serviços</a></li>
-        <li><a href="pets.php">Pets</a></li>
+        <li><a href="forum.php">Fórum</a></li>
         <li style="float:right"><a class="active" href="perfil.php">Perfil</a></li>
     </ul>
 </nav>
