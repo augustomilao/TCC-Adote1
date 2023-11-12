@@ -12,13 +12,12 @@ empresas (?)
 <?php
 
 session_start();
-var_dump($_SESSION);
+
 include '../modelos/conexao.php';
 include '../modelos/modelopost.php';
 
 $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
 
-var_dump($posts);
 
 ?>
 

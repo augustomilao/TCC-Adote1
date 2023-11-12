@@ -1,5 +1,5 @@
 <!--
-//TODO: Criar funções
+Criar funções
 perdidos
 adoção
 feed

@@ -17,11 +17,11 @@
     <br>
         <h4>Novo Serviço</h4>
 
-        <form action="../controladores/controleServico.php" enctype="multipart/form-data">
+        <form action="../controladores/controleServico.php" enctype="multipart/form-data" method="post">
             <label for="nome">Nome</label>
             <input class="form-control" name="nome" type="text" required>
             <br>
-            <label for="ocal">Local</label>
+            <label for="local">Local</label>
             <input class="form-control" name="local" type="text" required>
             <br>
             <label for="tipo">Tipo</label>
@@ -34,7 +34,7 @@
             <textarea class="form-control" name="descricao" type="text" maxlength="500" required></textarea>
             <small>Máximo 500 caracteres</small>
             <br><br>
-            <input class="form-control" type="file" name="foto" id="foto" required>
+            <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required>
             <br><br>
             <button type="submit" class="btn btn-outline-success">Cadastrar</button>
         </form>
