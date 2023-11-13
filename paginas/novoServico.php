@@ -25,7 +25,15 @@
             <input class="form-control" name="local" type="text" required>
             <br>
             <label for="tipo">Tipo</label>
-            <input class="form-control" name="tipo" type="text" required>
+            <select class="form-control" name="tipo" id="" required>
+                <option value="" selected>Selecione Um</option>
+                <option value="banhoetosa">Banho e Tosa</option>
+                <option value="adestramento">Adestramento</option>
+                <option value="veterinario">Veterinario</option>
+                <option value="passeiopet">Passeio Pet</option>
+                <option value="hotelpet">Hotel Pet</option>
+                <option value="outro">Outro</option>
+            </select>
             <br>
             <label for="contato">Contato</label>
             <input class="form-control" name="contato" type="text" required>
