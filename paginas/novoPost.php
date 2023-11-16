@@ -1,13 +1,3 @@
-<!--
-//TODO: Criar funções
-perdidos
-adoção
-feed
-posts
-cadastrar pets
-perfil
-empresas (?)
--->
 
 <!DOCTYPE html>
 <html lang="ptbr">
@@ -25,7 +15,32 @@ empresas (?)
 
 
     <div class="container">
-
+        <form action="../controladores/controlePost.php" enctype="multipart/form-data" method="post">
+            <label for="titulo">Titulo</label>
+            <input class="form-control" type="text" name="titulo" required>
+            <br>
+            <label for="texto">Texto</label>
+            <textarea class="form-control" name="texto" id="" cols="30" rows="4" maxlength="500" required></textarea>
+            <small>Máximo 500 caracteres</small>
+            <br><br>
+            <label for="fileToUpload">Imagem</label>
+            <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required>
+            <small>A imagem ficara em escala 1x1, imagens quadradas serão melhor vistas</small>
+            <br>
+            <label for="filtro">Escolha um grupo pro seu post</label>
+            <select class="form-control" name="filtro" id="" required>
+                <option value="" selected>Selecione um</option>
+                <option value="pets">Pets</option>
+                <option value="perdido">Pet Perdido</option>
+                <option value="dicas">Dicas</option>
+                <option value="reclamacao">Reclamação</option>
+                <option value="elogio">Elogio</option>
+                <option value="recomendacao">Recomendação</option>
+            </select>
+            <small>Deixe sempre um número de contato caso espere respostas (exemplo: Pet perdido)</small>
+            <br><br>
+            <button class="btn btn-success" type="submit">Criar Post</button>
+        </form>
     </div>
 
 

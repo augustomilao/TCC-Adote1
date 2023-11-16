@@ -1,13 +1,4 @@
-<!--
-//TODO: Criar funções
-perdidos
-adoção
-feed
-posts
-cadastrar pets
-perfil
-empresas (?)
--->
+<!-- //TODO Criar a página de post unico COM COMENTÁRIOS -->
 
 <!DOCTYPE html>
 <html lang="ptbr">

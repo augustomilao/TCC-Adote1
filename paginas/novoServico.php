@@ -43,6 +43,7 @@
             <small>Máximo 500 caracteres</small>
             <br><br>
             <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required>
+            <small>A imagem ficara em escala 1x1, imagens quadradas serão melhor vistas</small>
             <br><br>
             <button type="submit" class="btn btn-outline-success">Cadastrar</button>
         </form>

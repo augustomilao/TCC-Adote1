@@ -41,7 +41,20 @@ $servicos = BuscaServico($conn);
         <h2>Serviços para nossos pets!</h2>
         <p style="margin: 0;">Aqui você verá todos os serviços que nossos usuários oferecem!</p>
         <small style="color:brown">Não temos ligação com o serviço, apenas mostramos ele.</small>
-        <br><hr>
+        <br>
+        <form action="" method="get">
+            <label for="filtro">Filtar por:</label>
+            <select class="form-control" name="filtro" id="">
+                <option value="todos" selected>Todos</option>
+                <option value="banhoetosa">Banho e Tosa</option>
+                <option value="adestramento">Adestramento</option>
+                <option value="veterinario">Veterinario</option>
+                <option value="passeiopet">Passeio Pet</option>
+                <option value="hotelpet">Hotel Pet</option>
+                <option value="outro">Outro</option>
+            </select>
+        </form>
+        <hr>
     </div>
 
     <div class="container">
