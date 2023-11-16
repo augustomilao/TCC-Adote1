@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -28,39 +27,58 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
     <div class="tudo container">
         <br>
         <h4>Seus Dados</h4>
-        
-            <div style="text-align: center;">
-                <h5><?= $_SESSION['nome_usuario'] ?></h5>
-                <img src="https://placehold.co/250" alt=""><br><br>
-            </div>
-            <div>
-                <div style="text-align: center;">
-                    <div>
 
-                        <h5>E-Mail:</h5>
-                        <p><?= $_SESSION['email'] ?></p>
-                    </div>
-                    <div>
-                       <h5>CEP:</h5>
-                       <p><?= $_SESSION['cep'] ?></p>
-                       <br>
-                       <!-- //TODO inserir foto -->
-                       <button onclick="Senha()" class="btn btn-danger" style="width: 250px;">Mudar Senha</button><br><br>
-                       <div id="novaSenha" style="display: none;">
-                       <form action="novaSenha.php" method="post">
+        <div style="text-align: center;">
+            <h5><?= $_SESSION['nome_usuario'] ?></h5>
+            <?php
+                if(file_exists("../imagens/usuarios/". $_SESSION['cpf'] .".png")){
+                    echo '<img src="../imagens/usuarios/'. $_SESSION['cpf'] .'.png" width="250" height="250" alt=""><br><br>';
+                }else{
+                    echo '<img src="https://placehold.co/250" alt=""><br><br>';
+                }
+            ?>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <button onclick="mudarFoto()" class="btn btn-primary">Mudar Foto</button>
+            <br>
+            <div id="novaFoto" style="display: none;">
+                <br>
+                <form action="../controladores/controleFoto.php" enctype="multipart/form-data" method="post">
+                    <input class="form-control" type="file" name="fileToUpload" id="fileToUpload" required><br>
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div>
+            <div style="text-align: center;">
+                <div>
+
+                    <h5>E-Mail:</h5>
+                    <p><?= $_SESSION['email'] ?></p>
+                </div>
+                <div>
+                    <h5>CEP:</h5>
+                    <p><?= $_SESSION['cep'] ?></p>
+                    <br>
+                    <!-- //TODO inserir foto -->
+                    <button onclick="Senha()" class="btn btn-danger" style="width: 250px;">Mudar Senha</button><br><br>
+                    <div id="novaSenha" style="display: none;">
+                        <form action="novaSenha.php" method="post">
                             <label for="senha">Nova Senha</label>
                             <input class="form-control" type="text" name="senha"><br>
                             <button class="btn btn-primary" type="submit">Mudar</button>
-                       </form>
-                       <br>
-                       </div>
-                       <!-- <button class="btn btn-warning" style="width: 250px;">Mudar CEP</button><br><br> -->
-                       <p>Tem algum serviço que queira anunciar? Cadastre aqui!</p>
-                       <button class="btn btn-success" onclick="novoServico()" style="width: 250px;">Cadastrar Serviço</button><br><br>
+                        </form>
+                        <br>
                     </div>
+                    <!-- <button class="btn btn-warning" style="width: 250px;">Mudar CEP</button><br><br> -->
+                    <p>Tem algum serviço que queira anunciar? Cadastre aqui!</p>
+                    <button class="btn btn-success" onclick="novoServico()" style="width: 250px;">Cadastrar Serviço</button><br><br>
                 </div>
             </div>
-        
+        </div>
+
 
         <br>
         <hr style="padding: 0; margin:0">
@@ -68,15 +86,15 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
 
         <h4>Seus Posts</h4>
         <div class="container" style="text-align: center;">
-        <?php
-                foreach ($posts as $post) {
-                    echo '<img onClick=Post(' . $post["id_post"] . ') class="reset" src="' . '../imagens/posts/' . $post['id_post'] . '.png" width="250" height="250" alt=""><br>';
-                    echo '<p class="reset" style="font-weight: bold;">' . $post['titulo_post'] . '</p>';
-                    // echo '<p class="reset" >' . $post['filtro_post'] . '</p>';
-                    echo '<p class="reset" >' . $post['texto_post'] . '</p>';
-                    echo '<hr>';
-                }
-        ?>
+            <?php
+            foreach ($posts as $post) {
+                echo '<img onClick=Post(' . $post["id_post"] . ') class="reset" src="' . '../imagens/posts/' . $post['id_post'] . '.png" width="250" height="250" alt=""><br>';
+                echo '<p class="reset" style="font-weight: bold;">' . $post['titulo_post'] . '</p>';
+                // echo '<p class="reset" >' . $post['filtro_post'] . '</p>';
+                echo '<p class="reset" >' . $post['texto_post'] . '</p>';
+                echo '<hr>';
+            }
+            ?>
         </div>
 
 
@@ -85,15 +103,24 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
     </div>
 
     <script>
-        function novoServico(){
+        function novoServico() {
             location.href = 'novoServico.php';
         }
 
-        function Senha(){
+        function mudarFoto() {
+            var display = document.getElementById('novaFoto').style.display;
+            if (display == 'none') {
+                document.getElementById('novaFoto').style.display = "block";
+            } else {
+                document.getElementById('novaFoto').style.display = "none";
+            }
+        }
+
+        function Senha() {
             var display = document.getElementById('novaSenha').style.display;
-            if(display == 'none'){
+            if (display == 'none') {
                 document.getElementById('novaSenha').style.display = "block";
-            }else{
+            } else {
                 document.getElementById('novaSenha').style.display = "none";
             }
         }
