@@ -18,6 +18,12 @@ function BuscaServico($conn){
     return $resultado;
 }
 
+function BuscaServicoEspecifico($conn, $servico){
+    $sql = "SELECT * FROM servicos WHERE id_servico = '$servico'";
+    $resultado = $conn -> query($sql) -> fetch_assoc();
+    return $resultado;
+}
+
 
 
 ?>

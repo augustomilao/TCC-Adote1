@@ -38,7 +38,7 @@ $posts = BuscaTodosPosts($conn);
         <br>
         <form action="" method="get">
             <label for="filtro">Filtar por:</label>
-            <select class="form-control" name="filtro" id="">
+            <select onchange="Filtro()" class="form-control" name="filtro" id="">
                 <option value="todos" selected>Todos</option>
                 <option value="pets">Pets</option>
                 <option value="perdido">Pet Perdido</option>
@@ -53,8 +53,7 @@ $posts = BuscaTodosPosts($conn);
         <hr>
 
         <div class="container">
-
-            <div style="text-align: center;">
+            <div style="text-align: center;" id="todos">
                 <?php
                 foreach ($posts as $post) {
                     echo '<img onClick=Post(' . $post["id_post"] . ') class="reset" src="' . '../imagens/posts/' . $post['id_post'] . '.png" width="250" height="250" alt=""><br>';
@@ -66,11 +65,29 @@ $posts = BuscaTodosPosts($conn);
                 ?>
             </div>
 
+            <div style="text-align: center;" id="especifico">
+
+            </div>
+
         </div>
 
     </div>
 
     <script>
+
+        function loadDoc(x) {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                document.getElementById("especifico").innerHTML = this.responseText;
+            }
+            xhttp.open("GET", "componentes/filtroPost.php?filtro="+x, true);
+            xhttp.send();
+        }
+
+        function Post(x) {
+            location.href = 'post.php?id=' + x;
+        }
+
         function NovoPost() {
             location.href = 'novoPost.php';
         }

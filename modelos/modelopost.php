@@ -1,8 +1,8 @@
 <?php
 
 function BuscaSeusPosts($conn, $cpf){
-    $sql = "SELECT * FROM posts WHERE id_dono_post = '$cpf'";
-    $resultado = $conn -> query($sql) -> fetch_assoc();
+    $sql = "SELECT * FROM posts WHERE id_dono_post = '$cpf' ORDER BY id_post DESC";
+    $resultado = $conn -> query($sql) -> fetch_all(MYSQLI_ASSOC);
 
     return $resultado;
 }
@@ -22,5 +22,11 @@ function BuscaTodosPosts($conn){
     $sql = "SELECT * FROM posts";
     $resultado = $conn -> query($sql) -> fetch_all(MYSQLI_ASSOC);
 
+    return $resultado;
+}
+
+function BuscaPostEspecifico($conn, $post){
+    $sql = "SELECT * FROM posts WHERE id_post = '$post'";
+    $resultado = $conn -> query($sql) -> fetch_assoc();
     return $resultado;
 }

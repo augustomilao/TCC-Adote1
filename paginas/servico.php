@@ -1,9 +1,14 @@
 <?php
 
-var_dump($_GET);
+// var_dump($_GET);
+
+include_once("../modelos/conexao.php");
+include_once("../modelos/modeloservico.php");
+
+$post = BuscaServicoEspecifico($conn, $_GET['cod']);
 
 ?>
-<!-- //TODO Criar a página de servico unico -->
+<!-- //TODO Criar avaliação -->
 <!DOCTYPE html>
 <html lang="ptbr">
 
@@ -19,10 +24,19 @@ var_dump($_GET);
     <?php include_once("componentes/navegacao.php"); ?>
 
 
-    <div class="container">
-
+    <div class="container" style="text-align:center">
+        <br><br>
+        <h1><?= $post['nome_servico'] ?></h1>
+        <img class="reset" src="../imagens/servicos/<?= $post['foto_servico'] ?>.png" width="250" height="250" alt="">
+        <br><br>
+        <p><?= $post['descricao_servico'] ?></p>
+        <br>
+        <h5>Entre em contato: <?= $post['contato_servico'] ?></h5>
+        <small>Localidade:  <?= $post['local_servico'] ?></small>
+        <hr>
+        <h1>Avaliações</h1>
+        
     </div>
-
 
 
 </body>

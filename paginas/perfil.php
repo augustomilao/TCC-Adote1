@@ -1,13 +1,3 @@
-<!--
-//TODO: Criar funções
-perdidos
-adoção
-feed
-posts
-cadastrar pets
-perfil
-empresas (?)
--->
 
 <?php
 
@@ -69,23 +59,16 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
         <br>
 
         <h4>Seus Posts</h4>
-
-        <div style="display:grid; grid-template-columns: auto auto auto auto;">
-
-        <!-- //TODO Criar "seus posts, ao inves de seus pets" -->
-
-            <div>
-                <div>
-                    <img style="border: 1px solid black;" src="https://placehold.co/250" alt="" srcset="">
-                    <div style="width: 252px;text-align: center;border: 1px solid black;border-top:none;"><p style="margin:0; padding:2px">Nick</p></div>
-                </div>
-            </div>
-
-            <!-- //TODO Adicionar Pets -->
-            <div onclick="AdicionarPet()">
-                <img style="border: 1px solid black;" src="../assets/adicionarPets.png" alt="">
-            </div>
-
+        <div class="container" style="text-align: center;">
+        <?php
+                foreach ($posts as $post) {
+                    echo '<img onClick=Post(' . $post["id_post"] . ') class="reset" src="' . '../imagens/posts/' . $post['id_post'] . '.png" width="250" height="250" alt=""><br>';
+                    echo '<p class="reset" style="font-weight: bold;">' . $post['titulo_post'] . '</p>';
+                    // echo '<p class="reset" >' . $post['filtro_post'] . '</p>';
+                    echo '<p class="reset" >' . $post['texto_post'] . '</p>';
+                    echo '<hr>';
+                }
+        ?>
         </div>
 
 

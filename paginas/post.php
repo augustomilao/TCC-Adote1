@@ -1,4 +1,17 @@
-<!-- //TODO Criar a página de post unico COM COMENTÁRIOS -->
+<!-- //TODO Criar COM COMENTÁRIOS -->
+
+<?php
+
+session_start();
+
+include_once("../modelos/conexao.php");
+include_once("../modelos/modelopost.php");
+
+$post = BuscaPostEspecifico($conn, $_GET['id']);
+
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="ptbr">
@@ -15,8 +28,16 @@
     <?php include_once("componentes/navegacao.php"); ?>
 
 
-    <div class="container">
-        
+    <div class="container" style="text-align:center">
+        <br><br>
+        <h1><?= $post['titulo_post'] ?></h1>
+        <img class="reset" src="../imagens/posts/<?= $post['id_post'] ?>.png" width="250" height="250" alt="">
+        <br><br>
+        <p><?= $post['texto_post'] ?></p>
+        <small>Data do Post: <?= $post['data_post'] ?></small>
+        <br><br>
+        <hr><br>
+        <h1>Comentários</h1>
     </div>
 
 
