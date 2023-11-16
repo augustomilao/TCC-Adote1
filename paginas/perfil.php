@@ -44,9 +44,17 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
                        <h5>CEP:</h5>
                        <p><?= $_SESSION['cep'] ?></p>
                        <br>
-                       <!-- //TODO Mudar senha e cep -->
-                       <button class="btn btn-danger" style="width: 250px;">Mudar Senha</button><br><br>
-                       <button class="btn btn-warning" style="width: 250px;">Mudar CEP</button><br><br>
+                       <!-- //TODO inserir foto -->
+                       <button onclick="Senha()" class="btn btn-danger" style="width: 250px;">Mudar Senha</button><br><br>
+                       <div id="novaSenha" style="display: none;">
+                       <form action="novaSenha.php" method="post">
+                            <label for="senha">Nova Senha</label>
+                            <input class="form-control" type="text" name="senha"><br>
+                            <button class="btn btn-primary" type="submit">Mudar</button>
+                       </form>
+                       <br>
+                       </div>
+                       <!-- <button class="btn btn-warning" style="width: 250px;">Mudar CEP</button><br><br> -->
                        <p>Tem algum serviço que queira anunciar? Cadastre aqui!</p>
                        <button class="btn btn-success" onclick="novoServico()" style="width: 250px;">Cadastrar Serviço</button><br><br>
                     </div>
@@ -79,6 +87,15 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
     <script>
         function novoServico(){
             location.href = 'novoServico.php';
+        }
+
+        function Senha(){
+            var display = document.getElementById('novaSenha').style.display;
+            if(display == 'none'){
+                document.getElementById('novaSenha').style.display = "block";
+            }else{
+                document.getElementById('novaSenha').style.display = "none";
+            }
         }
     </script>
 

@@ -31,3 +31,10 @@ function SalvaDadosCache($resultado){
     $_SESSION['cpf'] = $resultado['cpf'];
 
 }
+
+function MudarSenha($conn, $cpf, $novaSenha){
+    $senha = sha1($novaSenha);
+    $sql = "UPDATE usuarios SET senha = '$senha' WHERE cpf = '$cpf'";
+
+    $conn -> query($sql);
+}
