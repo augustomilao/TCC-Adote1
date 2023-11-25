@@ -37,8 +37,8 @@ $posts = BuscaTodosPosts($conn);
         <p style="margin: 0;">Aqui nós interagimos! Mostre seu pet para nós, ou adote um novo amigo!</p>
         <br>
         <form action="" method="get">
-            <label for="filtro">Filtar por:</label>
-            <select onchange="Filtro()" class="form-control" name="filtro" id="">
+            <label for="filtro">Filtrar por:</label>
+            <select onchange="Filtro()" class="form-control" name="filtro" id="selectfiltro">
                 <option value="todos" selected>Todos</option>
                 <option value="pets">Pets</option>
                 <option value="perdido">Pet Perdido</option>
@@ -47,8 +47,9 @@ $posts = BuscaTodosPosts($conn);
                 <option value="elogio">Elogio</option>
                 <option value="recomendacao">Recomendação</option>
             </select>
-        </form>
-        <br>
+        </form><br>
+        <button class="btn btn-success" onclick="loadDoc()">Aplicar filtro</button>
+        <br><br><br> 
         <button class="btn btn-primary" onclick="NovoPost()">Novo Post</button>
         <hr>
 
@@ -75,10 +76,15 @@ $posts = BuscaTodosPosts($conn);
 
     <script>
 
-        function loadDoc(x) {
+        function loadDoc() {
+            var select = document.getElementById("selectfiltro");
+            var x = select.value;
             const xhttp = new XMLHttpRequest();
+
+
             xhttp.onload = function() {
                 document.getElementById("especifico").innerHTML = this.responseText;
+                document.getElementById("todos").style.display = 'none';
             }
             xhttp.open("GET", "componentes/filtroPost.php?filtro="+x, true);
             xhttp.send();

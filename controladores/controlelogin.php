@@ -7,13 +7,19 @@ session_start();
 
 $r = Login($conn, $_POST['cpf'], $_POST['senha']);
 
-if(empty($r)){
-    header('Location: ../?erro=CPF e/ou senha errados');
-}else{
+if (empty($r)) {
+?>
+    <script>
+        window.location.replace(" ../?erro=CPF e/ou senha errados");
+    </script>
+<?php
+} else {
     SalvaDadosCache($r);
-    header('Location: ../paginas/principal.php');
+?>
+    <script>
+        window.location.replace(" ../paginas/principal.php");
+    </script>
+<?php
 }
-
-
 
 ?>

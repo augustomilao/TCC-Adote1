@@ -43,23 +43,23 @@ session_start();
     </style>
 </head>
 
-<body>
+<body style="background-image: url('assets/fundo.webp');background-size: cover;background-position: center;background-repeat: no-repeat;height: 100vh;">
 
     <div id="logindiv" class="divs block">
         <h2>Login</h2>
         <form action="controladores/controleLogin.php" method="post">
             <label for="cpf">CPF</label>
-            <input class="form-control" type="text" name="cpf">
+            <input oninput="validateCPF(this.value)" class="form-control" type="text" name="cpf">
             <br>
             <label for="senha">Senha</label>
             <input class="form-control" type="password" name="senha">
             <br>
             <?php
-                if(@!empty($_GET['erro'])){
-                    echo "<p style='color:brown;font-weight:bold'>Erro de: ". $_GET['erro'] . "</p>";
-                };
+            if (@!empty($_GET['erro'])) {
+                echo "<p style='color:brown;font-weight:bold'>Erro de: " . $_GET['erro'] . "</p>";
+            };
             ?>
-            <button class="btn btn-danger" type="submit">Login</button>
+            <button id="confirma" disabled class="btn btn-danger" type="submit">Login</button>
         </form>
 
         <div>
@@ -70,12 +70,11 @@ session_start();
 
     <div id="cadastrodiv" class="divs none">
 
-        //TODO Criar verificações para criar a conta
         <h2>Cadastro</h2>
         <form action="controladores/controleCadastroUsuario.php" method="post">
 
             <label for="cpf">CPF</label>
-            <input class="form-control" type="text" name="cpf">
+            <input oninput="validateCPF2(this.value)" class="form-control" type="text" name="cpf">
 
             <label for="nome_usuario">Nome</label>
             <input class="form-control" type="text" name="nome_usuario">
@@ -92,7 +91,7 @@ session_start();
             <label for="confirmasenha">Confirmar Senha</label>
             <input class="form-control" type="text" name="confirmasenha">
             <br>
-            <button class="btn btn-primary" type="submit">Cadastrar</button>
+            <button id="confirma2" disabled class="btn btn-primary" type="submit">Cadastrar</button>
 
             <div>
                 <br>
@@ -110,6 +109,74 @@ session_start();
         function Cadastro() {
             document.getElementById('logindiv').style.display = 'none';
             document.getElementById('cadastrodiv').style.display = 'block';
+        }
+
+        const cpfsInvalidos = ["11111111111", "22222222222", "33333333333", "44444444444" ,"55555555555", "66666666666", "77777777777", "88888888888", "99999999999"]; // Adicione outros CPFs inválidos conforme necessário
+
+        function validateCPF(cpf) {
+            // Remover caracteres não numéricos
+            cpf = cpf.replace(/\D/g, '');
+
+            // Verificar se o CPF possui 11 dígitos
+            if (cpf.length !== 11) {
+                console.log('CPF inválido. Deve conter 11 dígitos.');
+                document.getElementById('confirma').disabled = true;
+                return;
+            }
+
+            // Verificar se o CPF está na lista de CPFs inválidos
+            if (cpfsInvalidos.includes(cpf)) {
+                document.getElementById('confirma').disabled = true;
+                return;
+            }
+
+            // Calcular os dígitos verificadores
+            const digitos = cpf.split('').map(Number);
+            const soma1 = digitos.slice(0, 9).reduce((acc, value, index) => acc + value * (10 - index), 0) % 11;
+            const primeiroDigitoVerificador = (soma1 < 2) ? 0 : 11 - soma1;
+
+            const soma2 = digitos.slice(0, 10).reduce((acc, value, index) => acc + value * (11 - index), 0) % 11;
+            const segundoDigitoVerificador = (soma2 < 2) ? 0 : 11 - soma2;
+
+            // Verificar se os dígitos verificadores estão corretos
+            if (primeiroDigitoVerificador !== digitos[9] || segundoDigitoVerificador !== digitos[10]) {
+                document.getElementById('confirma').disabled = true;
+            } else {
+                document.getElementById('confirma').disabled = false;
+            }
+        }
+
+        function validateCPF2(cpf) {
+            // Remover caracteres não numéricos
+            cpf = cpf.replace(/\D/g, '');
+
+            // Verificar se o CPF possui 11 dígitos
+            if (cpf.length !== 11) {
+                console.log('CPF inválido. Deve conter 11 dígitos.');
+                document.getElementById('confirma2').disabled = true;
+                return;
+            }
+
+            // Verificar se o CPF está na lista de CPFs inválidos
+            if (cpfsInvalidos.includes(cpf)) {
+                document.getElementById('confirma2').disabled = true;
+                return;
+            }
+
+            // Calcular os dígitos verificadores
+            const digitos = cpf.split('').map(Number);
+            const soma1 = digitos.slice(0, 9).reduce((acc, value, index) => acc + value * (10 - index), 0) % 11;
+            const primeiroDigitoVerificador = (soma1 < 2) ? 0 : 11 - soma1;
+
+            const soma2 = digitos.slice(0, 10).reduce((acc, value, index) => acc + value * (11 - index), 0) % 11;
+            const segundoDigitoVerificador = (soma2 < 2) ? 0 : 11 - soma2;
+
+            // Verificar se os dígitos verificadores estão corretos
+            if (primeiroDigitoVerificador !== digitos[9] || segundoDigitoVerificador !== digitos[10]) {
+                document.getElementById('confirma2').disabled = true;
+            } else {
+                document.getElementById('confirma2').disabled = false;
+            }
         }
     </script>
 

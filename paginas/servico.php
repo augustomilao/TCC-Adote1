@@ -9,6 +9,7 @@ include_once("../modelos/modeloavaliacao.php");
 $post = BuscaServicoEspecifico($conn, $_GET['cod']);
 $avaliacoes = BuscaAvaliacaoPorServico($conn, $_GET['cod']);
 
+
 ?>
 <!-- //TODO Criar avaliação -->
 <!DOCTYPE html>

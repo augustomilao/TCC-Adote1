@@ -44,7 +44,7 @@ $servicos = BuscaServico($conn);
         <br>
         <form action="" method="get">
             <label for="filtro">Filtar por:</label>
-            <select class="form-control" name="filtro" id="">
+            <select class="form-control" name="filtro" id="selectfiltro">
                 <option value="todos" selected>Todos</option>
                 <option value="banhoetosa">Banho e Tosa</option>
                 <option value="adestramento">Adestramento</option>
@@ -53,13 +53,14 @@ $servicos = BuscaServico($conn);
                 <option value="hotelpet">Hotel Pet</option>
                 <option value="outro">Outro</option>
             </select>
-        </form>
+        </form><br>
+        <button class="btn btn-success" onclick="loadDoc()">Aplicar filtro</button>
         <hr>
     </div>
 
     <div class="container">
 
-        <div style="text-align: center;">
+        <div style="text-align: center;" id="todos">
             <?php
             foreach($servicos as $serv){
             echo '<img onClick=Servico('.$serv["foto_servico"].') class="reset" src="'.'../imagens/servicos/'. $serv['foto_servico'].'.png" width="250" height="250" alt=""><br>';
@@ -69,9 +70,26 @@ $servicos = BuscaServico($conn);
             }
             ?>
         </div>
+        <div style="text-align: center;" id="especifico">
+        </div>
 
     </div>
     <script>
+         function loadDoc() {
+            var select = document.getElementById("selectfiltro");
+            var x = select.value;
+            const xhttp = new XMLHttpRequest();
+
+
+            xhttp.onload = function() {
+                document.getElementById("especifico").innerHTML = this.responseText;
+                document.getElementById("todos").style.display = 'none';
+            }
+            xhttp.open("GET", "componentes/filtroServico.php?filtro="+x, true);
+            xhttp.send();
+        }
+
+
         function Servico(x){
             location.href = 'servico.php?cod=' + x;
         }

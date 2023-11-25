@@ -63,7 +63,7 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
                     <p><?= $_SESSION['cep'] ?></p>
                     <br>
                     <!-- //TODO inserir foto -->
-                    <button onclick="Senha()" class="btn btn-danger" style="width: 250px;">Mudar Senha</button><br><br>
+                    <button onclick="Senha()" class="btn btn-warning" style="width: 250px;">Mudar Senha</button><br><br>
                     <div id="novaSenha" style="display: none;">
                         <form action="novaSenha.php" method="post">
                             <label for="senha">Nova Senha</label>
@@ -75,6 +75,7 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
                     <!-- <button class="btn btn-warning" style="width: 250px;">Mudar CEP</button><br><br> -->
                     <p>Tem algum serviço que queira anunciar? Cadastre aqui!</p>
                     <button class="btn btn-success" onclick="novoServico()" style="width: 250px;">Cadastrar Serviço</button><br><br>
+                    <button class="btn btn-danger" onclick="Logout()" style="width: 250px;">Sair</button><br><br>
                 </div>
             </div>
         </div>
@@ -124,6 +125,11 @@ $posts = BuscaSeusPosts($conn, $_SESSION['cpf']);
                 document.getElementById('novaSenha').style.display = "none";
             }
         }
+
+        function Logout(){
+            window.location.replace("logout.php");
+        }
+
     </script>
 
 </body>
