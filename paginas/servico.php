@@ -4,8 +4,10 @@
 
 include_once("../modelos/conexao.php");
 include_once("../modelos/modeloservico.php");
+include_once("../modelos/modeloavaliacao.php");
 
 $post = BuscaServicoEspecifico($conn, $_GET['cod']);
+$avaliacoes = BuscaAvaliacaoPorServico($conn, $_GET['cod']);
 
 ?>
 <!-- //TODO Criar avaliação -->
@@ -32,13 +34,48 @@ $post = BuscaServicoEspecifico($conn, $_GET['cod']);
         <p><?= $post['descricao_servico'] ?></p>
         <br>
         <h5>Entre em contato: <?= $post['contato_servico'] ?></h5>
-        <small>Localidade:  <?= $post['local_servico'] ?></small>
+        <small>Localidade: <?= $post['local_servico'] ?></small>
         <hr>
         <h1>Avaliações</h1>
-        
+        <button onclick="ModalAvalicao()" class="btn btn-success">Nova Avaliação</button>
+        <div style="width: 30%; margin:auto; display: none;" id="modal"><br>
+            <form action="../controladores/controleAvaliacao.php" method="post">
+                <input type="hidden" name="id_servico" value="<?= $_GET['cod'] ?>">
+                <label for="texto_avaliacao">Texto (Opcional)</label>
+                <textarea class="form-control" type="text" name="texto_avaliacao" maxlength="500"></textarea>
+                <br>
+                <label for="nota">Nota</label>
+                <select class="form-control" name="nota" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                </select><br>
+                <button class="btn btn-primary">Enviar Avaliação</button>
+            </form>
+        </div>
+        <div style="text-align: left;">
+            <?php
+            foreach ($avaliacoes as $av) {
+                echo '<h4>' . $av["nome_usuario"] . '</h4>';
+                echo '<h5> Nota: ' . $av["nota"] . '/5</h5>';
+                echo '<p>' . $av["texto_avaliacao"] . '</p><br>';
+            }
+            ?>
+        </div>
     </div>
 
-
+    <script>
+        function ModalAvalicao() {
+            var display = document.getElementById('modal').style.display;
+            if (display == 'none') {
+                document.getElementById('modal').style.display = "block";
+            } else {
+                document.getElementById('modal').style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
