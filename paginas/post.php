@@ -6,8 +6,10 @@ session_start();
 
 include_once("../modelos/conexao.php");
 include_once("../modelos/modelopost.php");
+include_once("../modelos/modelocomentario.php");
 
 $post = BuscaPostEspecifico($conn, $_GET['id']);
+$comentarios = BuscaComentariosPorPost($conn, $_GET['id']);
 
 
 
@@ -38,10 +40,39 @@ $post = BuscaPostEspecifico($conn, $_GET['id']);
         <br><br>
         <hr><br>
         <h1>Comentários</h1>
+        <button onclick="ModalAvalicao()" class="btn btn-success">Novo Comentário</button>
+        <div style="width: 30%; margin:auto; display: none;" id="modal"><br>
+            <form action="../controladores/controleComentario.php" method="post">
+                <input type="hidden" name="id_post" value="<?= $_GET['id'] ?>">
+                <label for="texto_comentario">Comentário</label>
+                <textarea class="form-control" type="text" name="texto_comentario" maxlength="500"></textarea>
+                <br>
+                <button class="btn btn-primary">Enviar Comentário</button>
+            </form>
+        </div>
+        <div style="text-align: left;">
+        <?php
+
+            foreach($comentarios as $c){
+                echo '<h4>' . $c["nome_usuario"] . '</h4>';
+                echo '<p>' . $c["texto_comentario"] . '</p><br>';
+            }
+
+        ?>
+        </div>
     </div>
 
 
-
+    <script>
+        function ModalAvalicao() {
+            var display = document.getElementById('modal').style.display;
+            if (display == 'none') {
+                document.getElementById('modal').style.display = "block";
+            } else {
+                document.getElementById('modal').style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>
