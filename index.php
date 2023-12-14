@@ -88,8 +88,8 @@ session_start();
             <label for="senha">Senha</label>
             <input class="form-control" type="text" name="senha">
 
-            <label for="confirmasenha">Confirmar Senha</label>
-            <input class="form-control" type="text" name="confirmasenha">
+            <!-- <label for="confirmasenha">Confirmar Senha</label>
+            <input class="form-control" type="text" name="confirmasenha"> -->
             <br>
             <button id="confirma2" disabled class="btn btn-primary" type="submit">Cadastrar</button>
 
